@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.chenfy.touchtransfer_android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application
+        android:name=".base.App"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <provider
+            android:name=".filehandle.dao.ImgProvider"
+            android:authorities="com.chenfy.touchtransfer_android.imgprovider"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name=".ui.MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- 接收相册的分享 -->
+        <activity
+            android:name=".ui.ReceiveActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/TranslucentAty">
+            <intent-filter android:label="@string/app_name">
+                <action android:name="android.intent.action.SEND" />
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="image/*" />
+                <data android:mimeType="video/*" />
+            </intent-filter>
+        </activity>
+        <!--读取到NFC标签后的中转页面-->
+        <activity
+            android:name=".ui.NFCActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/TranslucentAty">
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="ext"
+                    android:pathPrefix="/com.chenfy.touchtransfer_android"
+                    android:scheme="vnd.android.nfc" />
+            </intent-filter>
+        </activity>
+        <!--写入NFC页面-->
+        <activity
+            android:name=".ui.NFCWriteActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:enabled="false">
+
+            <intent-filter>
+                <action android:name="android.nfc.action.TECH_DISCOVERED" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.nfc.action.TECH_DISCOVERED"
+                android:resource="@xml/techs" />
+            <intent-filter>
+                <action android:name="android.nfc.action.TAG_DISCOVERED" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!--扫描二维码页面-->
+        <activity
+            android:name=".ui.ScanQRActivity"
+            android:screenOrientation="portrait" />
+        <!--查看大图页面-->
+        <activity
+            android:name=".ui.GalleryActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.VideoAty"
+            android:screenOrientation="landscape"/>
+        <activity android:name=".ui.AboutActivity"/>
+        <activity android:name=".ui.HelpActivity"/>
+    </application>
+
+</manifest>

@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".ui.MainActivity">
+    <item android:id="@+id/action_bind_nfc"
+        android:title="绑定NFC"
+        app:showAsAction="never"/>
+    <item android:id="@+id/action_del_all"
+        android:title="清除所有"
+        app:showAsAction="never"/>
+    <item android:id="@+id/action_about"
+        android:title="关于"
+        app:showAsAction="never"/>
+    <item android:id="@+id/action_help"
+        android:title="帮助"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_help"/>
+
+</menu>
